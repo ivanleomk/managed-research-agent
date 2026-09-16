@@ -34,3 +34,10 @@ Deliver `out/digest-YYYY-MM-DD.md` however you like (email, Telegram, Drive).
 
 ## SVHN note
 CNN/SVHN demos stay in Antigravity local talks — this repo is the **research** track for Managed Agents productization.
+
+
+## Talk snippets (Interactions ladder)
+
+See `talk/TALK.md` and `talk/snippets/01_*.py` … `06_*.py`.
+
+Progression for slides: hello → sync tools → **background async** → background+tools → managed agent → **EDGAR research agent**.

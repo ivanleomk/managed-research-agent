@@ -17,3 +17,9 @@ You are a careful research agent. Prefer primary sources and structured APIs ove
 3. Fetch → normalize → synthesize.
 4. Write `out/brief-YYYY-MM-DD-<slug>.md` plus any raw dumps.
 5. End with: what you found, confidence, what you'd do next.
+
+## Custom research agents
+- Teach domain APIs as skills (start with `edgar-filings`).
+- Compose with `research-brief` for the write-up.
+- For tiny planning artifacts, use `design-md`.
+- Promote the same `.agents/` tree from Antigravity → CLI → Managed Agents.
