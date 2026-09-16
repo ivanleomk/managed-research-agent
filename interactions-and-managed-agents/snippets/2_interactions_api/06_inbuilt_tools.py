@@ -4,6 +4,7 @@
 No client-side tool loop: set processing="agentic" on a video input and the
 server navigates the timeline via built-in processing_call / processing_result steps.
 """
+
 from dotenv import load_dotenv
 from google import genai
 from rich import print
@@ -21,7 +22,6 @@ input_items = [
 print(input_items)
 
 interaction = client.interactions.create(model=MODEL, input=input_items)
-print(interaction)
 print(interaction.output_text)
 # Output:
 # [{'type': 'video', 'uri': 'https://youtu.be/...', 'processing': 'agentic'}, ...]
