@@ -111,6 +111,28 @@ Attempt 1 of 03 and 04 hit a transient backend failure (see gotcha 3); both pass
   `edgar-filings` + `research-brief` correctly (06 run above).
 - No skill changes were needed.
 
+## Task C — Gemini API CLI (managed agent scaffold)
+
+The experimental [`gemini-api` CLI](https://github.com/google-gemini/gemini-api-cli)
+(**v0.2.1**, sha256-verified binary) ran the full managed-agent lifecycle
+against this repo's skills — see [`talk/GEMINI_API_CLI.md`](GEMINI_API_CLI.md)
+for the walkthrough and `talk/logs/cli_*` for sanitized request/response shapes.
+
+| Step | Command | Result |
+|------|---------|--------|
+| smoke | `gemini-api run "…capital of France…"` | pass — `completed` |
+| scaffold | `gemini-api agents init cli-agent` | pass — `talk/cli-agent/` (agent.yaml + AGENTS.md + skills/) |
+| test | `gemini-api agents test --prompt "…NVDA → CIK…"` | pass — agent read mounted `edgar-filings/SKILL.md`, correct CIK 0001045810 |
+| deploy | `gemini-api agents create` | pass — `edgar-research-agent` created |
+| invoke | `gemini-api run "…AAPL…" --agent edgar-research-agent` | pass — fresh sandbox, CIK 0000320193, latest 10-K 2025-10-31 |
+
+CLI gotchas: `--dry-run` prints the real API key in the `x-goog-api-key`
+header (redact before slides); the CLI's scaffold layout (`AGENTS.md` +
+`skills/`) inlines to the same `/.agents/` paths as this repo's `.agents/`
+tree, so skills transfer by copying directories; a newer
+`antigravity-preview-09-2026` base agent was spotted via `agents list`
+(05-2026 still works).
+
 ## Reading the logs
 
 `trace.jsonl` has one object per API call:
