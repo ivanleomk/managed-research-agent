@@ -1,23 +1,44 @@
 # Builders Night — Interactions → Antigravity → Managed Agents
 
-## Arc (30 min + Q&A)
-1. **Interactions** — tools get easier as apps get harder (snippets 01→04)
-2. **Antigravity local** — SVHN skill (~30s train) + iterate
-3. **CLI** — same harness, scriptable
-4. **Managed Agents** — mount skills, bring online
-5. **Custom research agent** — EDGAR skill → daily digest
+## Three acts (30 min + Q&A)
 
-## Snippet ladder (present these)
-| # | File | Point |
-|---|------|-------|
-| 01 | `01_hello_interaction.py` | One call, typed steps |
-| 02 | `02_sync_function_calling.py` | Custom tools + `previous_interaction_id` |
-| 03 | `03_background_async.py` | `background=True` — live/long jobs without HTTP timeouts |
-| 04 | `04_background_tools_loop.py` | Background + tools → poll `requires_action` → result |
-| 05 | `05_managed_agent_remote.py` | `agent=` + `environment="remote"` |
-| 06 | `06_edgar_research_agent.py` | Custom research agent (skills mounted) |
+### Act 1 — Tour of the Interactions API
+Goal: show why complex apps stay small on Interactions vs rolling your own agent loop.
 
-**Talk line:** “generateContent forces you to own the agent loop. Interactions gives you state, background, and steps — so complex apps stay small.”
+| Beat | Snippet | Feature |
+|------|---------|---------|
+| Hello | `01_hello_interaction.py` | One call, typed `steps`, `output_text` |
+| Tools | `02_sync_function_calling.py` | Function declarations + `previous_interaction_id` (server state) |
+| Background | `03_background_async.py` | `background=True` — no 60s HTTP death |
+| Background + tools | `04_background_tools_loop.py` | Poll `requires_action` → submit `function_result` |
 
-## Design.md / small stuff
-For one-off design docs, a thin skill (`design-md`) is enough — same mount path as EDGAR. Don’t overbuild.
+**Line to land:** generateContent makes you own history, timeouts, and the tool loop. Interactions gives you state, background, and observable steps.
+
+### Act 2 — Antigravity (tune here)
+Goal: prototype the research agent locally. All skill work happens in this act.
+
+- Open Antigravity with this repo (`.agents/AGENTS.md` + skills).
+- Live-tune **EDGAR** skill: ticker → CIK → filings → brief.
+- Optional small stitch: `design-md` skill for one-pagers.
+- Optional speed demo: SVHN skill (~30s train on Mac) if you want “agents write code” energy.
+- Same harness via CLI once the skill feels right.
+
+**Line to land:** skills are just markdown + optional scripts. You iterate locally until the agent does the research loop you want.
+
+### Act 3 — Managed Agents (ship the tuned thing)
+Goal: combine Act 1 surface + Act 2 skills. No re-tuning — mount and launch.
+
+- Snippet `05_managed_agent_remote.py` — `agent=` + `environment="remote"` + `background=True`.
+- Snippet `06_edgar_research_agent.py` — same EDGAR / research-brief skills, now online.
+- Punchline: local skill → Managed Agent daily digest / scheduled run.
+
+**Line to land:** Interactions is how you call it; Antigravity is how you shape it; Managed Agents is how you run it hosted.
+
+## What we do NOT cover tonight
+- Harbor / Kaggle evals (park for a longer session)
+- Deep OpenAlex (optional Q&A depth)
+
+## Repo map for demos
+- Skills: `.agents/skills/edgar-filings`, `research-brief`, `design-md`, …
+- Snippets: `talk/snippets/01_*.py` … `06_*.py`
+- GitHub: `ivanleomk/managed-research-agent`

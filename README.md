@@ -36,6 +36,14 @@ Deliver `out/digest-YYYY-MM-DD.md` however you like (email, Telegram, Drive).
 CNN/SVHN demos stay in Antigravity local talks — this repo is the **research** track for Managed Agents productization.
 
 
+## Talk shape (Builders Night)
+
+1. **Interactions tour** — snippets 01–04 (hello → tools → background → background+tools)
+2. **Antigravity** — tune EDGAR / research skills locally (this repo)
+3. **Managed Agents** — snippets 05–06; mount the same skills and ship
+
+See `talk/TALK.md`.
+
 ## Talk snippets (Interactions ladder)
 
 See `talk/TALK.md` and `talk/snippets/01_*.py` … `06_*.py`.
